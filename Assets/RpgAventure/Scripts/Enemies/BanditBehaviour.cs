@@ -7,8 +7,7 @@ using UnityEngine.AI;
 namespace RpgAdventure {
 public class BanditBehaviour : MonoBehaviour
 {
-        [SerializeField] float detectionRadius = 10f ;
-        [SerializeField] float detectionAngle = 90f;
+        public PlayerScanner playerScanner;
         [SerializeField] float timeTostopPursuit = 2.0f;
         [SerializeField] float timeToWaitOnPrusuit = 2f;
         private PlayerController m_Target;
@@ -29,7 +28,7 @@ public class BanditBehaviour : MonoBehaviour
 
         private void Update()
         {
-          var target =  lookForPlayer();
+          var target =  playerScanner.Detect(transform);
             if (m_Target == null) 
             {
                 if (target != null)
@@ -76,34 +75,7 @@ public class BanditBehaviour : MonoBehaviour
             m_EnemyController.SetFollowTarget(m_OriginalPosition);
         }
 
-        private PlayerController lookForPlayer()
-        {
-            if(PlayerController.Instance == null)
-            {
-                return null;
-            }
-            Vector3 enemyPosition = transform.position;
-            Vector3 toPlayer = PlayerController.Instance.transform.position - enemyPosition;
-            toPlayer.y = 0;
-
-            if(toPlayer.magnitude <= detectionRadius)
-            {
-
-                // so sanh cos goc giua vec to forward =1, vector toplayer.normalized = 1,
-                // thi tich vo huong vector3.dot la 1*1*cos(normalized, forward),
-                // so voi cos 1/2goc nhin dectectionAngle. neu tich vo huong lon hon thi trong vung thay duoc
-                if(Vector3.Dot(toPlayer.normalized,transform.forward) > Mathf.Cos(detectionAngle * 0.5f * Mathf.Deg2Rad))
-                {
-
-                    
-                   return PlayerController.Instance;
-                    
-                }
-
-            }
-            
-            return null;
-        }
+      
 
 #if UNITY_EDITOR
         private void OnDrawGizmosSelected()
@@ -112,13 +84,13 @@ public class BanditBehaviour : MonoBehaviour
             UnityEditor.Handles.color = color;
             Vector3 rotateForward = Quaternion.Euler(
                 0,
-                -detectionAngle*0.5f,
+                -playerScanner.detectionAngle*0.5f,
                 0)*transform.forward;
             UnityEditor.Handles.DrawSolidArc(
                 transform.position,
-                Vector3.up, rotateForward, 
-                detectionAngle, 
-                detectionRadius);
+                Vector3.up, rotateForward,
+                playerScanner.detectionAngle,
+                playerScanner.detectionRadius);
         }
 #endif
 
