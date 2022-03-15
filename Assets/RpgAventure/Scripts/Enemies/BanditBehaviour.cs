@@ -12,7 +12,7 @@ public class BanditBehaviour : MonoBehaviour
         [SerializeField] float timeTostopPursuit = 2.0f;
         [SerializeField] float timeToWaitOnPrusuit = 2f;
         private PlayerController m_Target;
-        private NavMeshAgent m_NavMeshAgent;
+        private EnemyController m_EnemyController;
         private Animator m_Animator;
         private float m_timeSinceLostTarget = 0f;
         private Vector3 m_OriginalPosition;
@@ -22,7 +22,7 @@ public class BanditBehaviour : MonoBehaviour
 
         private void Awake()
         {
-            m_NavMeshAgent = GetComponent<NavMeshAgent>();
+            m_EnemyController = GetComponent<EnemyController>();
             m_Animator = GetComponent<Animator>();
             m_OriginalPosition = transform.position;
         }
@@ -42,7 +42,7 @@ public class BanditBehaviour : MonoBehaviour
             }
             else
             {
-                m_NavMeshAgent.SetDestination(m_Target.transform.position);
+                m_EnemyController.SetFollowTarget(m_Target.transform.position);
                 m_Animator.SetBool("InPursuit", true);
                 if (target == null)
                 {
@@ -50,7 +50,7 @@ public class BanditBehaviour : MonoBehaviour
                     if(m_timeSinceLostTarget >= timeTostopPursuit)
                     {
                         m_Target = null;
-                        m_NavMeshAgent.isStopped = true;
+                 
                         m_Animator.SetBool(m_HashInPursuit, false);
                         StartCoroutine(WaitOnPursuit());
                        
@@ -72,8 +72,8 @@ public class BanditBehaviour : MonoBehaviour
         private IEnumerator WaitOnPursuit()
         {
             yield return new WaitForSeconds(timeToWaitOnPrusuit);
-            m_NavMeshAgent.isStopped = false;
-            m_NavMeshAgent.SetDestination(m_OriginalPosition);
+            
+            m_EnemyController.SetFollowTarget(m_OriginalPosition);
         }
 
         private PlayerController lookForPlayer()
