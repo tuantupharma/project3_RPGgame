@@ -10,6 +10,8 @@ public class BanditBehaviour : MonoBehaviour
         public PlayerScanner playerScanner;
         [SerializeField] float timeTostopPursuit = 2.0f;
         [SerializeField] float timeToWaitOnPrusuit = 2f;
+        public float attackDistance = 1.1f;
+
         private PlayerController m_Target;
         private EnemyController m_EnemyController;
         private Animator m_Animator;
@@ -43,6 +45,19 @@ public class BanditBehaviour : MonoBehaviour
             {
                 m_EnemyController.SetFollowTarget(m_Target.transform.position);
                 m_Animator.SetBool("InPursuit", true);
+
+                Vector3 toTarget = m_Target.transform.position- transform.position;
+                if(toTarget.magnitude <= attackDistance)
+                {
+                    Debug.Log("Attaking!!!");
+                    m_Animator.SetBool(m_HashInPursuit,false);
+                }
+                else
+                {
+                    m_Animator.SetBool(m_HashInPursuit,true);
+                    m_EnemyController.SetFollowTarget(m_Target.transform.position);
+                }
+
                 if (target == null)
                 {
                     m_timeSinceLostTarget += Time.deltaTime;
