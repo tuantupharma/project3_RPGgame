@@ -19,7 +19,7 @@ public class BanditBehaviour : MonoBehaviour
         private Vector3 m_OriginalPosition;
         private readonly int m_HashInPursuit = Animator.StringToHash("InPursuit");
         private readonly int m_HashNearBase = Animator.StringToHash("NearBase");
-
+        private readonly int m_HashAttack = Animator.StringToHash("Attack");
 
         private void Awake()
         {
@@ -50,6 +50,7 @@ public class BanditBehaviour : MonoBehaviour
                 if(toTarget.magnitude <= attackDistance)
                 {
                     Debug.Log("Attaking!!!");
+                    m_Animator.SetTrigger(m_HashAttack);
                     m_Animator.SetBool(m_HashInPursuit,false);
                 }
                 else
