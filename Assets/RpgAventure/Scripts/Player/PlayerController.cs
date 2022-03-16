@@ -32,7 +32,7 @@ public class PlayerController : MonoBehaviour
         const float k_Deceleration = 35f;
 
         private readonly int m_HashForwardSpeed = Animator.StringToHash("ForwardSpeed");
-        private readonly int m_HashAttack = Animator.StringToHash("Attack");
+        private readonly int m_HashMeleeAttack = Animator.StringToHash("MeleeAttack");
 
 
         //video 10 add player input
@@ -69,10 +69,10 @@ public class PlayerController : MonoBehaviour
                 transform.rotation = m_TargetRotation;
             }
 
-            m_Animator.ResetTrigger(m_HashAttack);
+            m_Animator.ResetTrigger(m_HashMeleeAttack);
             if (m_PlayerInput.IsAttack)
             {
-                m_Animator.SetTrigger(m_HashAttack);
+                m_Animator.SetTrigger(m_HashMeleeAttack);
             }
         
 
