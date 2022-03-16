@@ -1764,6 +1764,8 @@ GameObject:
   - component: {fileID: 3309648672969543380}
   - component: {fileID: 3254042328565225768}
   - component: {fileID: 5944734747812898736}
+  - component: {fileID: 354807994}
+  - component: {fileID: 354807995}
   m_Layer: 0
   m_Name: Bandit
   m_TagString: Untagged
@@ -1801,9 +1803,9 @@ Animator:
   m_GameObject: {fileID: 3222748526691566746}
   m_Enabled: 1
   m_Avatar: {fileID: 9000000, guid: 7e30eee73c241d5448ce0ac372cf6602, type: 3}
-  m_Controller: {fileID: 9100000, guid: d7c55390ab0320c47b84f63184ecb1b9, type: 2}
+  m_Controller: {fileID: 9100000, guid: fb12040d43a6c4d44a8810c793eab8cd, type: 2}
   m_CullingMode: 0
-  m_UpdateMode: 0
+  m_UpdateMode: 1
   m_ApplyRootMotion: 1
   m_LinearVelocityBlending: 0
   m_WarningMessage: 
@@ -1862,6 +1864,46 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: cfc6779f28d601146b278931be9e0c5a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerScanner:
+    detectionRadius: 10
+    detectionAngle: 90
+  timeTostopPursuit: 2
+  timeToWaitOnPrusuit: 2
+  attackDistance: 1.1
+--- !u!195 &354807994
+NavMeshAgent:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3222748526691566746}
+  m_Enabled: 1
+  m_AgentTypeID: 0
+  m_Radius: 0.5
+  m_Speed: 1
+  m_Acceleration: 900
+  avoidancePriority: 50
+  m_AngularSpeed: 900
+  m_StoppingDistance: 0
+  m_AutoTraverseOffMeshLink: 1
+  m_AutoBraking: 1
+  m_AutoRepath: 1
+  m_Height: 2
+  m_BaseOffset: 0
+  m_WalkableMask: 4294967295
+  m_ObstacleAvoidanceType: 4
+--- !u!114 &354807995
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3222748526691566746}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8862a14f25921864b969e23e49d0949b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &3222750867885669866

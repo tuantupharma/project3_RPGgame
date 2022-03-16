@@ -17,6 +17,8 @@ public class BanditBehaviour : MonoBehaviour
         private Animator m_Animator;
         private float m_timeSinceLostTarget = 0f;
         private Vector3 m_OriginalPosition;
+        private Quaternion m_OriginalRotation;
+
         private readonly int m_HashInPursuit = Animator.StringToHash("InPursuit");
         private readonly int m_HashNearBase = Animator.StringToHash("NearBase");
         private readonly int m_HashAttack = Animator.StringToHash("Attack");
@@ -26,6 +28,7 @@ public class BanditBehaviour : MonoBehaviour
             m_EnemyController = GetComponent<EnemyController>();
             m_Animator = GetComponent<Animator>();
             m_OriginalPosition = transform.position;
+            m_OriginalRotation = transform.rotation;
         }
 
         private void Update()
@@ -43,20 +46,21 @@ public class BanditBehaviour : MonoBehaviour
             }
             else
             {
-                m_EnemyController.SetFollowTarget(m_Target.transform.position);
+                m_EnemyController.FollowTarget(m_Target.transform.position);
                 m_Animator.SetBool("InPursuit", true);
 
                 Vector3 toTarget = m_Target.transform.position- transform.position;
                 if(toTarget.magnitude <= attackDistance)
                 {
-                    Debug.Log("Attaking!!!");
+                    m_EnemyController.StopFollowTarget();
+                  //  m_Animator.ResetTrigger(m_HashAttack);
                     m_Animator.SetTrigger(m_HashAttack);
-                    m_Animator.SetBool(m_HashInPursuit,false);
+                  //  m_Animator.SetBool(m_HashInPursuit,false);
                 }
                 else
                 {
                     m_Animator.SetBool(m_HashInPursuit,true);
-                    m_EnemyController.SetFollowTarget(m_Target.transform.position);
+                    m_EnemyController.FollowTarget(m_Target.transform.position);
                 }
 
                 if (target == null)
@@ -80,7 +84,21 @@ public class BanditBehaviour : MonoBehaviour
             }
             Vector3 toBase= m_OriginalPosition - transform.position;
             toBase.y = 0;
-            m_Animator.SetBool(m_HashNearBase, toBase.magnitude < 0.01f);
+
+            bool nearBase = toBase.magnitude < 0.01f;
+            m_Animator.SetBool(m_HashNearBase, nearBase);
+
+            if (nearBase)
+            {
+                Quaternion targetRotation = Quaternion.RotateTowards(
+                    transform.rotation, 
+                    m_OriginalRotation,
+                    360*Time.deltaTime
+                    );
+                transform.rotation = targetRotation;
+
+            }
+
 
         }
 
@@ -88,7 +106,8 @@ public class BanditBehaviour : MonoBehaviour
         {
             yield return new WaitForSeconds(timeToWaitOnPrusuit);
             
-            m_EnemyController.SetFollowTarget(m_OriginalPosition);
+            m_EnemyController.FollowTarget(m_OriginalPosition);
+
         }
 
       
