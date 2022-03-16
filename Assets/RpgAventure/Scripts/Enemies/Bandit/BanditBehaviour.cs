@@ -128,6 +128,12 @@ public class BanditBehaviour : MonoBehaviour
                 Vector3.up, rotateForward,
                 playerScanner.detectionAngle,
                 playerScanner.detectionRadius);
+
+            UnityEditor.Handles.DrawSolidArc(
+               transform.position,
+               Vector3.up, rotateForward,
+               360,
+               playerScanner.meleeDetectionRadius);
         }
 #endif
 

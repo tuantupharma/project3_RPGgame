@@ -6,6 +6,7 @@ using UnityEngine;
 [System.Serializable]
 public class PlayerScanner
 {
+    public float meleeDetectionRadius = 2.0f;
     public float detectionRadius = 10f;
     public float detectionAngle = 90f;
 
@@ -25,8 +26,8 @@ public class PlayerScanner
             // so sanh cos goc giua vec to forward =1, vector toplayer.normalized = 1,
             // thi tich vo huong vector3.dot la 1*1*cos(normalized, forward),
             // so voi cos 1/2goc nhin dectectionAngle. neu tich vo huong lon hon thi trong vung thay duoc
-            if (Vector3.Dot(toPlayer.normalized, detector.forward) > 
-                Mathf.Cos(detectionAngle * 0.5f * Mathf.Deg2Rad))
+            if ((Vector3.Dot(toPlayer.normalized, detector.forward) > 
+                Mathf.Cos(detectionAngle * 0.5f * Mathf.Deg2Rad)) || toPlayer.magnitude <=meleeDetectionRadius)
             {
 
 
