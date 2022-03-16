@@ -66,9 +66,11 @@ public class PlayerController : MonoBehaviour
                 transform.rotation = m_TargetRotation;
             }
 
-      //  video 5 animation controling forward speed
-
-            //    
+            if (m_PlayerInput.IsAttack)
+            {
+                Debug.Log("is atk");
+            }
+        
 
 
            
