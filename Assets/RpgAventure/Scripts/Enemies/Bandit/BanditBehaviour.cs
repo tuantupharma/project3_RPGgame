@@ -93,10 +93,15 @@ public class BanditBehaviour : MonoBehaviour
             Vector3 toTarget = m_FollowTarget.transform.position - transform.position;
             if (toTarget.magnitude <= attackDistance)
             {
+                var toTargetRotation = Quaternion.LookRotation(toTarget);
+               transform.rotation = Quaternion.RotateTowards(
+                   transform.rotation,
+                   toTargetRotation,
+                   270*Time.deltaTime
+                   );
                 m_EnemyController.StopFollowTarget();
-                //  m_Animator.ResetTrigger(m_HashAttack);
                 m_Animator.SetTrigger(m_HashAttack);
-                //  m_Animator.SetBool(m_HashInPursuit,false);
+               
             }
             else
             {
