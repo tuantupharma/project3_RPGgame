@@ -10,6 +10,7 @@ public class PlayerController : MonoBehaviour
        public static PlayerController Instance 
         { get { return s_Instance; } }
 
+        [SerializeField] MeleeWeapon meleeWeapon;
         [SerializeField] float maxForwardSpeed = 8.0f;
         [SerializeField] float speed;
         [SerializeField] float rotationSpeed;
@@ -73,6 +74,7 @@ public class PlayerController : MonoBehaviour
             if (m_PlayerInput.IsAttack)
             {
                 m_Animator.SetTrigger(m_HashMeleeAttack);
+                meleeWeapon.BeginAttack();
             }
         
 
