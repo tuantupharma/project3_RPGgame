@@ -1277,6 +1277,16 @@ PrefabInstance:
       propertyPath: m_Name
       value: Bandit
       objectReference: {fileID: 0}
+    - target: {fileID: 5944734747812898736, guid: eaefec6a6237efc4d91ce52520960b8a,
+        type: 3}
+      propertyPath: timeTostopPursuit
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 5944734747812898736, guid: eaefec6a6237efc4d91ce52520960b8a,
+        type: 3}
+      propertyPath: timeToWaitOnPrusuit
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: eaefec6a6237efc4d91ce52520960b8a, type: 3}
 --- !u!1001 &3278750403337394564

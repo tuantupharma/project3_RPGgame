@@ -9,10 +9,12 @@ public class BanditBehaviour : MonoBehaviour
 {
         public PlayerScanner playerScanner;
         [SerializeField] float timeTostopPursuit = 2.0f;
-        [SerializeField] float timeToWaitOnPrusuit = 2f;
+        [SerializeField] float timeToWaitOnPursuit = 2f;
         public float attackDistance = 1.1f;
 
-        private PlayerController m_Target;
+        public bool hasFollowTarget { get { return m_FollowTarget != null; } }  
+
+        private PlayerController m_FollowTarget;
         private EnemyController m_EnemyController;
         private Animator m_Animator;
         private float m_timeSinceLostTarget = 0f;
@@ -33,56 +35,31 @@ public class BanditBehaviour : MonoBehaviour
 
         private void Update()
         {
-          var target =  playerScanner.Detect(transform);
-            if (m_Target == null) 
+            var detectedTarget = playerScanner.Detect(transform);
+            bool hasDetectedTarget = detectedTarget != null;
+
+            if (detectedTarget != null) { m_FollowTarget = detectedTarget; }
+            if(hasFollowTarget)
             {
-                if (target != null)
-                {
-                    m_Target = target;
-                }
-                
-
-
-            }
-            else
-            {
-                m_EnemyController.FollowTarget(m_Target.transform.position);
-                m_Animator.SetBool("InPursuit", true);
-
-                Vector3 toTarget = m_Target.transform.position- transform.position;
-                if(toTarget.magnitude <= attackDistance)
-                {
-                    m_EnemyController.StopFollowTarget();
-                  //  m_Animator.ResetTrigger(m_HashAttack);
-                    m_Animator.SetTrigger(m_HashAttack);
-                  //  m_Animator.SetBool(m_HashInPursuit,false);
-                }
-                else
-                {
-                    m_Animator.SetBool(m_HashInPursuit,true);
-                    m_EnemyController.FollowTarget(m_Target.transform.position);
-                }
-
-                if (target == null)
-                {
-                    m_timeSinceLostTarget += Time.deltaTime;
-                    if(m_timeSinceLostTarget >= timeTostopPursuit)
-                    {
-                        m_Target = null;
-                 
-                        m_Animator.SetBool(m_HashInPursuit, false);
-                        StartCoroutine(WaitOnPursuit());
-                       
-                    }
-                }
-                else
-                {
+                AttackOrFollowTarget();
+                if(hasDetectedTarget)
+                { 
                     m_timeSinceLostTarget = 0;
+                } 
+                else
+                { 
+                    StopPursuit(); 
                 }
 
-                
             }
-            Vector3 toBase= m_OriginalPosition - transform.position;
+
+            CheckIfNearBase();
+
+        }
+
+        private void CheckIfNearBase()
+        {
+            Vector3 toBase = m_OriginalPosition - transform.position;
             toBase.y = 0;
 
             bool nearBase = toBase.magnitude < 0.01f;
@@ -91,20 +68,45 @@ public class BanditBehaviour : MonoBehaviour
             if (nearBase)
             {
                 Quaternion targetRotation = Quaternion.RotateTowards(
-                    transform.rotation, 
+                    transform.rotation,
                     m_OriginalRotation,
-                    360*Time.deltaTime
+                    360 * Time.deltaTime
                     );
                 transform.rotation = targetRotation;
 
             }
-
-
         }
 
+        private void StopPursuit()
+        {
+            m_timeSinceLostTarget += Time.deltaTime;
+            if (m_timeSinceLostTarget >= timeTostopPursuit)
+            {
+                m_FollowTarget = null;
+                m_Animator.SetBool(m_HashInPursuit, false);
+                StartCoroutine(WaitOnPursuit());
+            }
+        }
+
+        private void AttackOrFollowTarget()
+        {
+            Vector3 toTarget = m_FollowTarget.transform.position - transform.position;
+            if (toTarget.magnitude <= attackDistance)
+            {
+                m_EnemyController.StopFollowTarget();
+                //  m_Animator.ResetTrigger(m_HashAttack);
+                m_Animator.SetTrigger(m_HashAttack);
+                //  m_Animator.SetBool(m_HashInPursuit,false);
+            }
+            else
+            {
+                m_Animator.SetBool(m_HashInPursuit, true);
+                m_EnemyController.FollowTarget(m_FollowTarget.transform.position);
+            }
+        }
         private IEnumerator WaitOnPursuit()
         {
-            yield return new WaitForSeconds(timeToWaitOnPrusuit);
+            yield return new WaitForSeconds(timeToWaitOnPursuit);
             
             m_EnemyController.FollowTarget(m_OriginalPosition);
 
