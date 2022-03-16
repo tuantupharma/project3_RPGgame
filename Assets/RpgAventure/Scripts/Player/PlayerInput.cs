@@ -42,9 +42,16 @@ public class PlayerInput : MonoBehaviour
 
             if (Input.GetButtonDown("Fire1"))
             {
-                m_IsAttack = true;
+                StartCoroutine(AttackAndWait());
             }
 
     }
+        private IEnumerator AttackAndWait()
+        {
+            m_IsAttack = true;
+            yield return new  WaitForSeconds(0.05f);
+            m_IsAttack = false;
+        }
+
 }
 }
