@@ -5,8 +5,8 @@ using UnityEngine;
 
 namespace RpgAdventure { 
 
-public class PlayerController : MonoBehaviour
-{
+public class PlayerController : MonoBehaviour, IAttackAnimListener
+    {
        public static PlayerController Instance 
         { get { return s_Instance; } }
 
@@ -74,7 +74,7 @@ public class PlayerController : MonoBehaviour
             if (m_PlayerInput.IsAttack)
             {
                 m_Animator.SetTrigger(m_HashMeleeAttack);
-                meleeWeapon.BeginAttack();
+                
             }
         
 
@@ -88,6 +88,17 @@ public class PlayerController : MonoBehaviour
             Vector3 movement = m_Animator.deltaPosition;
             movement += m_VerticalSpeed * Vector3.up* Time.fixedDeltaTime;
             m_CharController.Move(m_Animator.deltaPosition);
+        }
+        // this method is called by animation event
+        
+        public void MeleeAttackStart()
+        {
+            meleeWeapon.BeginAttack();
+        }
+        // this method is called by animation event
+        public void MeleeAttackEnd()
+        {
+            meleeWeapon.EndAttack();
         }
 
         private void ComputeVerticalMovement()

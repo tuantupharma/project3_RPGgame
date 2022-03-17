@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -52,6 +53,11 @@ namespace RpgAdventure
 
         }
 
+        public void EndAttack()
+        {
+            m_IsAttack = false;
+        }
+
 #if UNITY_EDITOR
 
         private void OnDrawGizmosSelected()
@@ -69,6 +75,8 @@ namespace RpgAdventure
                 }
             }    
         }
+
+      
 
 
 #endif
