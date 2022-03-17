@@ -8,6 +8,6 @@ public class Damageable : MonoBehaviour
 
     public void ApplyDamage()
     {
-        Debug.Log("Applying dmg");
+        //Debug.Log("Applying dmg");
     }
 }

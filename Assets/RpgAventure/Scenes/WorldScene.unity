@@ -1002,26 +1002,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ac0b09e7857660247b1477e93731de29, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!1 &1782172150 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 3222748526691566746, guid: eaefec6a6237efc4d91ce52520960b8a,
-    type: 3}
-  m_PrefabInstance: {fileID: 3224000196589818149}
-  m_PrefabAsset: {fileID: 0}
---- !u!136 &1782172151
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1782172150}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  m_Radius: 0.5
-  m_Height: 1.8
-  m_Direction: 1
-  m_Center: {x: 0, y: 0.9, z: 0}
 --- !u!1 &1862965254
 GameObject:
   m_ObjectHideFlags: 3
@@ -1515,6 +1495,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8382358997435081494, guid: a9baa65f9a49f0b4e8137ce48f0b522d,
         type: 3}
+      propertyPath: targetLayers.m_Bits
+      value: 256
+      objectReference: {fileID: 0}
+    - target: {fileID: 8382358997435081494, guid: a9baa65f9a49f0b4e8137ce48f0b522d,
+        type: 3}
       propertyPath: attackPoints.Array.size
       value: 3
       objectReference: {fileID: 0}
@@ -1661,26 +1646,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Bandit
-      objectReference: {fileID: 0}
-    - target: {fileID: 5944734747812898736, guid: eaefec6a6237efc4d91ce52520960b8a,
-        type: 3}
-      propertyPath: timeTostopPursuit
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5944734747812898736, guid: eaefec6a6237efc4d91ce52520960b8a,
-        type: 3}
-      propertyPath: timeToWaitOnPrusuit
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5944734747812898736, guid: eaefec6a6237efc4d91ce52520960b8a,
-        type: 3}
-      propertyPath: timeToWaitOnPursuit
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5944734747812898736, guid: eaefec6a6237efc4d91ce52520960b8a,
-        type: 3}
-      propertyPath: playerScanner.meleeDetectionRadius
-      value: 3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: eaefec6a6237efc4d91ce52520960b8a, type: 3}

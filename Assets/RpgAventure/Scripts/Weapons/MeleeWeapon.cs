@@ -16,6 +16,8 @@ namespace RpgAdventure
             public Vector3 offset;
             public Transform rootTransform;
         }
+
+        public LayerMask targetLayers;
         public int damage = 10;
         public AttackPoint[] attackPoints = new AttackPoint[0];
 
@@ -65,6 +67,13 @@ namespace RpgAdventure
         private void CheckDamage(Collider other, AttackPoint ap)
         {
             Damageable damageable = other.GetComponent<Damageable>();
+
+            // bitwise operators
+            if((targetLayers.value & (1 << other.gameObject.layer)) == 0)
+            {
+                return;
+            }
+            Debug.Log("We are hitting correct layer");
             if(damageable != null)
             {
                 damageable.ApplyDamage();
