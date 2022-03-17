@@ -50,8 +50,8 @@ namespace RpgAdventure
                         Collider collider = m_RayCastHitCache[j].collider;
                         if(collider != null)
                         {
-                           
-                            Debug.Log("hit hit");
+
+                            CheckDamage(collider,ap);
                         }
                         
                     }
@@ -60,6 +60,16 @@ namespace RpgAdventure
                     m_OriginAttackPos[0] = worldPos;    
                 }   
             }
+        }
+
+        private void CheckDamage(Collider other, AttackPoint ap)
+        {
+            Damageable damageable = other.GetComponent<Damageable>();
+            if(damageable != null)
+            {
+                damageable.ApplyDamage();
+            }  
+
         }
 
         public void BeginAttack()
