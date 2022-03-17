@@ -87,7 +87,7 @@ public class PlayerController : MonoBehaviour, IAttackAnimListener
         {
             Vector3 movement = m_Animator.deltaPosition;
             movement += m_VerticalSpeed * Vector3.up* Time.fixedDeltaTime;
-            m_CharController.Move(m_Animator.deltaPosition);
+            m_CharController.Move(movement);
         }
         // this method is called by animation event
         

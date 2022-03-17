@@ -1721,6 +1721,11 @@ PrefabInstance:
       propertyPath: meleeWeapon
       value: 
       objectReference: {fileID: 640909440}
+    - target: {fileID: 7665868098187888760, guid: 833a581dde8e22748ac6598cc668bf83,
+        type: 3}
+      propertyPath: m_MinMoveDistance
+      value: 0.001
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 833a581dde8e22748ac6598cc668bf83, type: 3}
 --- !u!4 &7671546242350874166 stripped
