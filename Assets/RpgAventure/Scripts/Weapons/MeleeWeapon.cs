@@ -21,6 +21,7 @@ namespace RpgAdventure
 
         private bool m_IsAttack = false;
         private Vector3[] m_OriginAttackPos;
+        private RaycastHit[] m_RayCastHitCache = new RaycastHit[32];
 
         private void FixedUpdate()
         {
@@ -31,10 +32,32 @@ namespace RpgAdventure
                     AttackPoint ap = attackPoints[i];
                     Vector3 worldPos = ap.rootTransform.position +
                         ap.rootTransform.TransformVector(ap.offset);
-                    Vector3 attackVector= worldPos - m_OriginAttackPos[i];
+                    Vector3 attackVector= (worldPos - m_OriginAttackPos[i]).normalized;
 
-                    Ray r = new Ray(worldPos, attackVector);
-                    Debug.DrawLine(worldPos, attackVector, Color.red, 4.0f);
+                    Ray ray = new Ray(worldPos, attackVector);
+                    Debug.DrawRay(worldPos, attackVector, Color.red, 4.0f);
+
+                 int contacts =   Physics.SphereCastNonAlloc(
+                        ray,
+                        ap.radius,
+                        m_RayCastHitCache,
+                        attackVector.magnitude,
+                        ~0,
+                        QueryTriggerInteraction.Ignore);
+                    for(int j = 0; j < contacts; j++)
+                    {
+
+                        Collider collider = m_RayCastHitCache[j].collider;
+                        if(collider != null)
+                        {
+                           
+                            Debug.Log("hit hit");
+                        }
+                        
+                    }
+                    
+
+                    m_OriginAttackPos[0] = worldPos;    
                 }   
             }
         }
