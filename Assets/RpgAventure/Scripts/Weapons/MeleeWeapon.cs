@@ -73,9 +73,11 @@ namespace RpgAdventure
             {
                 return;
             }
-            Debug.Log("We are hitting correct layer");
+            
             if(damageable != null)
             {
+                //TODO
+                Damageable.DamageMessage data;
                 damageable.ApplyDamage();
             }  
 

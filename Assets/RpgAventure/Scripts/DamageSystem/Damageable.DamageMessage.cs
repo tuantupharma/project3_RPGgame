@@ -5,13 +5,21 @@ using UnityEngine;
 namespace RpgAdventure
 {
     public partial class Damageable : MonoBehaviour
-    {
-        public int maxHitPoints;
-
-        public void ApplyDamage()
+{
+    public struct DamageMessage
         {
-            //Debug.Log("Applying dmg");
+            public MonoBehaviour damager;
+            public int amount;
+            public Vector3 damageSource;
+
+
+
         }
-    }
+
+
+
+
+}
+
 }
 
