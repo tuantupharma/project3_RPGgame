@@ -24,7 +24,7 @@ public class BanditBehaviour : MonoBehaviour, IMessageReceiver
         private readonly int m_HashInPursuit = Animator.StringToHash("InPursuit");
         private readonly int m_HashNearBase = Animator.StringToHash("NearBase");
         private readonly int m_HashAttack = Animator.StringToHash("Attack");
-
+        private readonly int m_HashHurt = Animator.StringToHash("Hurt");
         private void Awake()
         {
             m_EnemyController = GetComponent<EnemyController>();
@@ -65,8 +65,25 @@ public class BanditBehaviour : MonoBehaviour, IMessageReceiver
 
         public void OnReceiveMessage(MessageType type)
         {
-            Debug.Log("BANDIT BEHAVIOUR " +type);
+            switch (type)
+            {
+                case MessageType.DEAD:
+                    
+                        Debug.Log("dead anim");
+                        break;
+                    
+                case MessageType.DAMAGE:
+                    OnReceiveDamage();
+                    break ;
+                default:
+                    break;
+            }
             
+        }
+
+        private void OnReceiveDamage()
+        {
+            m_Animator.SetTrigger(m_HashHurt);
         }
 
         private void CheckIfNearBase()
