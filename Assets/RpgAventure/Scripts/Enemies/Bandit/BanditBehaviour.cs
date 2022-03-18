@@ -16,7 +16,7 @@ public class BanditBehaviour : MonoBehaviour, IMessageReceiver
 
         private PlayerController m_FollowTarget;
         private EnemyController m_EnemyController;
-        private Animator m_Animator;
+       
         private float m_timeSinceLostTarget = 0f;
         private Vector3 m_OriginalPosition;
         private Quaternion m_OriginalRotation;
@@ -28,7 +28,7 @@ public class BanditBehaviour : MonoBehaviour, IMessageReceiver
         private void Awake()
         {
             m_EnemyController = GetComponent<EnemyController>();
-            m_Animator = GetComponent<Animator>();
+           
             m_OriginalPosition = transform.position;
             m_OriginalRotation = transform.rotation;
         }
@@ -83,7 +83,7 @@ public class BanditBehaviour : MonoBehaviour, IMessageReceiver
 
         private void OnReceiveDamage()
         {
-            m_Animator.SetTrigger(m_HashHurt);
+            m_EnemyController.Animator.SetTrigger(m_HashHurt);
         }
 
         private void CheckIfNearBase()
@@ -92,7 +92,7 @@ public class BanditBehaviour : MonoBehaviour, IMessageReceiver
             toBase.y = 0;
 
             bool nearBase = toBase.magnitude < 0.01f;
-            m_Animator.SetBool(m_HashNearBase, nearBase);
+            m_EnemyController.Animator.SetBool(m_HashNearBase, nearBase);
 
             if (nearBase)
             {
@@ -112,7 +112,7 @@ public class BanditBehaviour : MonoBehaviour, IMessageReceiver
             if (m_timeSinceLostTarget >= timeTostopPursuit)
             {
                 m_FollowTarget = null;
-                m_Animator.SetBool(m_HashInPursuit, false);
+                m_EnemyController.Animator.SetBool(m_HashInPursuit, false);
                 StartCoroutine(WaitBeforeReturn());
             }
         }
@@ -133,7 +133,7 @@ public class BanditBehaviour : MonoBehaviour, IMessageReceiver
 
         private void FollowTarget()
         {
-            m_Animator.SetBool(m_HashInPursuit, true);
+            m_EnemyController.Animator.SetBool(m_HashInPursuit, true);
             m_EnemyController.FollowTarget(m_FollowTarget.transform.position);
         }
 
@@ -146,7 +146,7 @@ public class BanditBehaviour : MonoBehaviour, IMessageReceiver
                 270 * Time.deltaTime
                 );
             m_EnemyController.StopFollowTarget();
-            m_Animator.SetTrigger(m_HashAttack);
+            m_EnemyController.Animator.SetTrigger(m_HashAttack);
         }
 
         private IEnumerator WaitBeforeReturn()
