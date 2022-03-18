@@ -5,8 +5,8 @@ using UnityEngine.AI;
 
 
 namespace RpgAdventure {
-public class BanditBehaviour : MonoBehaviour
-{
+public class BanditBehaviour : MonoBehaviour, IMessageReceiver
+    {
         public PlayerScanner playerScanner;
         [SerializeField] float timeTostopPursuit = 2.0f;
         [SerializeField] float timeToWaitOnPursuit = 2f;
@@ -60,6 +60,13 @@ public class BanditBehaviour : MonoBehaviour
             }
 
             CheckIfNearBase();
+        }
+
+
+        public void OnReceiveMessage(MessageType type)
+        {
+            Debug.Log("BANDIT BEHAVIOUR " +type);
+            
         }
 
         private void CheckIfNearBase()

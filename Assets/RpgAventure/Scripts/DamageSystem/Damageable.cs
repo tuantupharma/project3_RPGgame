@@ -13,12 +13,7 @@ namespace RpgAdventure
         public int CurrentHitPoints { get; private set; }
         public List<MonoBehaviour> onDamageMessageReceivers;
 
-        public enum MessageType
-        {
-            DAMAGE,
-            DEAD
-
-        }
+      
 
         private void Awake()
         {
@@ -44,9 +39,9 @@ namespace RpgAdventure
                 CurrentHitPoints <=0 ? MessageType.DEAD : MessageType.DAMAGE;
             for(int i = 0; i < onDamageMessageReceivers.Count; i++)
             {
-                var receiver = onDamageMessageReceivers[i];
-                Debug.Log(messageType);
-                Debug.Log(receiver);
+                var receiver = onDamageMessageReceivers[i] as IMessageReceiver;
+                receiver.OnReceiveMessage(messageType);
+
             }
 
 
