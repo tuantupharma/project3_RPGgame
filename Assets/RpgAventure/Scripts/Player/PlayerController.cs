@@ -46,7 +46,8 @@ public class PlayerController : MonoBehaviour, IAttackAnimListener
             m_Animator = GetComponent<Animator>();
             m_CameraController = Camera.main.GetComponent<CameraController>();
             s_Instance = this;
-            
+
+            meleeWeapon.SetOwner(gameObject);
         }
         // Update is called once per frame
         void FixedUpdate()
