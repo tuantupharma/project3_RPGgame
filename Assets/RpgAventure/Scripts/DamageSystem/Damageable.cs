@@ -11,6 +11,14 @@ namespace RpgAdventure
         public float hitAngle = 360f;
         public int maxHitPoints;
         public int CurrentHitPoints { get; private set; }
+        public List<MonoBehaviour> onDamageMessageReceivers;
+
+        public enum MessageType
+        {
+            DAMAGE,
+            DEAD
+
+        }
 
         private void Awake()
         {
@@ -27,11 +35,18 @@ namespace RpgAdventure
 
             if (Vector3.Angle(transform.forward,positionToDamager)> hitAngle*0.5f)
             {
-                Debug.Log("not hitting");
+                return;
             }
-            else
+
+            CurrentHitPoints -= data.amount;
+
+            var messageType = 
+                CurrentHitPoints <=0 ? MessageType.DEAD : MessageType.DAMAGE;
+            for(int i = 0; i < onDamageMessageReceivers.Count; i++)
             {
-                Debug.Log("Hitting");
+                var receiver = onDamageMessageReceivers[i];
+                Debug.Log(messageType);
+                Debug.Log(receiver);
             }
 
 
