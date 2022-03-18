@@ -9,17 +9,56 @@ namespace RpgAdventure
         public GameObject ragdollPrefab;
         public void Replace()
         {
-          GameObject ragdollInstance = Instantiate(
-              ragdollPrefab,
-              transform.position,
-              transform.rotation);
+            GameObject ragdollInstance = Instantiate(ragdollPrefab, transform.position, transform.rotation);
+            ragdollInstance.SetActive(false);
 
-            // TODO iterate over all child of transform and copy position and rotation to the ragdoll
+            Transform ragdollTransform = ragdollInstance.transform;
+            Transform currentTransform = transform;
+
+            ragdollTransform.rotation = currentTransform.rotation;
+            ragdollTransform.position = currentTransform.position;
+
+            while (currentTransform != null && ragdollTransform != null)
+            {
+                if (currentTransform.name == ragdollTransform.name)
+                {
+                    ragdollTransform.position = currentTransform.position;
+                    ragdollTransform.rotation = currentTransform.rotation;
+                }
+
+                if (currentTransform.childCount > 0)
+                {
+                    currentTransform = currentTransform.GetChild(0);
+                    ragdollTransform = ragdollTransform.GetChild(0);
+                }
+                else
+                {
+                    while (currentTransform != null)
+                    {
+                        if (currentTransform.parent == null || ragdollTransform.parent == null)
+                        {
+                            currentTransform = null;
+                            ragdollTransform = null;
+                        }
+                        else if (currentTransform.GetSiblingIndex() + 1 == currentTransform.parent.childCount ||
+                                 currentTransform.GetSiblingIndex() + 1 == ragdollTransform.parent.childCount)
+                        {
+                            currentTransform = currentTransform.parent;
+                            ragdollTransform = ragdollTransform.parent;
+                        }
+                        else
+                        {
+                            currentTransform = currentTransform.parent.GetChild(currentTransform.GetSiblingIndex() + 1);
+                            ragdollTransform = ragdollTransform.parent.GetChild(ragdollTransform.GetSiblingIndex() + 1);
+                            break;
+                        }
+                    }
+                }
+            }
+
+
+            ragdollInstance.SetActive(true);
             Destroy(gameObject);
-
-
-
-
         }
 
 
