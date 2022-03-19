@@ -14,7 +14,7 @@ namespace RpgAdventure
 
             Transform ragdollTransform = ragdollInstance.transform;
             Transform currentTransform = transform;
-
+          
             ragdollTransform.rotation = currentTransform.rotation;
             ragdollTransform.position = currentTransform.position;
 
