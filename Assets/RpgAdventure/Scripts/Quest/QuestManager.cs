@@ -29,6 +29,7 @@ namespace RpgAdventure
         private void Awake()
         {
             LoadQuestsFromDB();
+            AssignQuests();
         }
 
         private void LoadQuestsFromDB()
@@ -44,6 +45,31 @@ namespace RpgAdventure
 
 
 
+        }
+        private void AssignQuests()
+        {
+            var questGivers = FindObjectsOfType<QuestGiver>();
+
+            if (questGivers != null && questGivers.Length > 0)
+            {
+                foreach (var questGiver in questGivers)
+                {
+                    AssignQuestTo(questGiver);
+                }
+
+            }
+            
+        }
+
+        private void AssignQuestTo(QuestGiver questGiver)
+        {
+            foreach(var quest in quests)
+            {
+                if(quest.questGiver == questGiver.GetComponent<UniqueId>().Uid)
+                {
+                    questGiver.quest = quest;
+                }
+            }
         }
 
 

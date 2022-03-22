@@ -2924,6 +2924,7 @@ GameObject:
   - component: {fileID: 8325812317603824013}
   - component: {fileID: 8271157596383877097}
   - component: {fileID: 8215203040149097493}
+  - component: {fileID: 7319638047417490551}
   m_Layer: 0
   m_Name: Female NPC
   m_TagString: Untagged
@@ -3012,6 +3013,30 @@ MonoBehaviour:
     - prefab: {fileID: 100000, guid: 7e462abb283b73a4ba97438461785130, type: 3}
     slots: 4
   disabledGraySkeleton: {fileID: 0}
+--- !u!114 &7319638047417490551
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8331198682446249799}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 00df71a0045a3014b96a903e6ec69dae, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  quest:
+    uid: 
+    title: 
+    description: 
+    experience: 
+    gold: 0
+    amount: 0
+    targets: []
+    talkTo: 
+    explore: {x: 0, y: 0, z: 0}
+    questGiver: 
+    type: 0
 --- !u!1 &8331201362920377759
 GameObject:
   m_ObjectHideFlags: 0
