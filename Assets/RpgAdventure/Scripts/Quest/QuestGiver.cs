@@ -9,5 +9,7 @@ namespace RpgAdventure
     public class QuestGiver : MonoBehaviour
 {
         public Quest quest;
-}
+
+       
+    }
 }
