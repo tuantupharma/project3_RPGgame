@@ -7,12 +7,19 @@ namespace RpgAdventure
 
 
 
-public class PlayerInput : MonoBehaviour
-{
-        [SerializeField] float distanceToInteractWithNpc = 2.0f;
+    public class PlayerInput : MonoBehaviour
+    {
+
+        public static PlayerInput Instance {get {return s_Instance;} }
+      //  [SerializeField] float distanceToInteractWithNpc = 2.0f;
+
+        private static PlayerInput s_Instance;
         private Vector3 m_Movement;
         private bool m_IsAttack;
-        private bool m_IsTalk;
+       
+        private Collider m_OptionClickTarget;
+
+        public Collider OptionClickTarget { get { return m_OptionClickTarget; } }
         public Vector3 MoveInput
         {
             get { return m_Movement; }
@@ -33,12 +40,11 @@ public class PlayerInput : MonoBehaviour
             }
         }
 
-        public bool IsTalk
+      
+
+        private void Awake()
         {
-            get
-            {
-                return m_IsTalk;
-            }
+            s_Instance = this;
         }
 
         // Update is called once per frame
@@ -67,7 +73,7 @@ public class PlayerInput : MonoBehaviour
 
         private void HandleLeftMouseBtnDown()
         {
-            StartCoroutine(AttackAndWait());
+            StartCoroutine(TriggerAttack());
         }
 
         private void HandleRightMouseBtnDown()
@@ -76,22 +82,21 @@ public class PlayerInput : MonoBehaviour
 
             bool hasHit = Physics.Raycast(ray, out RaycastHit hit);
 
-            if (hasHit && hit.collider.CompareTag("QuestGiver"))
+            if (hasHit)
             {
-                var distanceToTarget = (transform.position - hit.transform.position).magnitude;
-                // other option   var distance = Vector3.Distance(transform.position, hit.transform.position);
-
-                if (distanceToTarget <= distanceToInteractWithNpc)
-                {
-                    m_IsTalk = true;
-                    
-                }
-
+                m_OptionClickTarget = hit.collider;
+                StartCoroutine(TriggerOptionTarget(hit.collider));
 
             }
         }
 
-        private IEnumerator AttackAndWait()
+        private IEnumerator TriggerOptionTarget(Collider other)
+        {
+            m_OptionClickTarget = other;
+            yield return new WaitForSeconds(0.05f);
+            m_OptionClickTarget = null;
+        }
+        private IEnumerator TriggerAttack()
         {
             m_IsAttack = true;
             yield return new  WaitForSeconds(0.05f);
