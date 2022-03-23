@@ -128,6 +128,41 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 3278750403337394564}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &292589157
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 292589158}
+  m_Layer: 5
+  m_Name: DialogOptionList
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &292589158
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 292589157}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 362770798}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &298722486
 GameObject:
   m_ObjectHideFlags: 0
@@ -329,6 +364,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1152731101}
+  - {fileID: 292589158}
   m_Father: {fileID: 1517952085}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -664,33 +700,68 @@ PrefabInstance:
       objectReference: {fileID: 2800000, guid: b52eede5ed9bb1a4ea8c31e3e7520932, type: 3}
     - target: {fileID: 4823714314615024966, guid: e42fd1b4b446a1d4bb5130399eb8b0d3,
         type: 3}
+      propertyPath: quest.uid
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 4823714314615024966, guid: e42fd1b4b446a1d4bb5130399eb8b0d3,
+        type: 3}
       propertyPath: dialog.welcomeText
-      value: Hello Stranger
+      value: Hello Stranger, What brings you here?
       objectReference: {fileID: 0}
     - target: {fileID: 4823714314615024966, guid: e42fd1b4b446a1d4bb5130399eb8b0d3,
         type: 3}
       propertyPath: dialog.queries.Array.size
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 4823714314615024966, guid: e42fd1b4b446a1d4bb5130399eb8b0d3,
         type: 3}
       propertyPath: dialog.queries.Array.data[0].text
-      value: there bandits around town
+      value: I am looking for a job
       objectReference: {fileID: 0}
     - target: {fileID: 4823714314615024966, guid: e42fd1b4b446a1d4bb5130399eb8b0d3,
         type: 3}
       propertyPath: dialog.queries.Array.data[1].text
-      value: goodbye
-      objectReference: {fileID: 0}
-    - target: {fileID: 4823714314615024966, guid: e42fd1b4b446a1d4bb5130399eb8b0d3,
-        type: 3}
-      propertyPath: dialog.queries.Array.data[0].answer.text
       value: i will take care of it
       objectReference: {fileID: 0}
     - target: {fileID: 4823714314615024966, guid: e42fd1b4b446a1d4bb5130399eb8b0d3,
         type: 3}
+      propertyPath: dialog.queries.Array.data[2].text
+      value: Not your bussiness
+      objectReference: {fileID: 0}
+    - target: {fileID: 4823714314615024966, guid: e42fd1b4b446a1d4bb5130399eb8b0d3,
+        type: 3}
+      propertyPath: dialog.queries.Array.data[0].answer.text
+      value: 'There are 2 bandits north of the town that  are causing trouble to
+        our people.
+
+        Could you take care of it?
+
+'
+      objectReference: {fileID: 0}
+    - target: {fileID: 4823714314615024966, guid: e42fd1b4b446a1d4bb5130399eb8b0d3,
+        type: 3}
       propertyPath: dialog.queries.Array.data[1].answer.text
-      value: see yaa
+      value: goodbye
+      objectReference: {fileID: 0}
+    - target: {fileID: 4823714314615024966, guid: e42fd1b4b446a1d4bb5130399eb8b0d3,
+        type: 3}
+      propertyPath: dialog.queries.Array.data[2].answer.text
+      value: Get loss!
+      objectReference: {fileID: 0}
+    - target: {fileID: 4823714314615024966, guid: e42fd1b4b446a1d4bb5130399eb8b0d3,
+        type: 3}
+      propertyPath: dialog.queries.Array.data[0].answer.questId
+      value: q-2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4823714314615024966, guid: e42fd1b4b446a1d4bb5130399eb8b0d3,
+        type: 3}
+      propertyPath: dialog.queries.Array.data[1].answer.questId
+      value: q-2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4823714314615024966, guid: e42fd1b4b446a1d4bb5130399eb8b0d3,
+        type: 3}
+      propertyPath: dialog.queries.Array.data[2].answer.questId
+      value: q-2
       objectReference: {fileID: 0}
     - target: {fileID: 4823714314615024966, guid: e42fd1b4b446a1d4bb5130399eb8b0d3,
         type: 3}
@@ -700,6 +771,11 @@ PrefabInstance:
     - target: {fileID: 4823714314615024966, guid: e42fd1b4b446a1d4bb5130399eb8b0d3,
         type: 3}
       propertyPath: dialog.queries.Array.data[1].answer.forceDialogQuit
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4823714314615024966, guid: e42fd1b4b446a1d4bb5130399eb8b0d3,
+        type: 3}
+      propertyPath: dialog.queries.Array.data[2].answer.forceDialogQuit
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4948170054236206566, guid: e42fd1b4b446a1d4bb5130399eb8b0d3,
@@ -1264,7 +1340,7 @@ GameObject:
   - component: {fileID: 1152731103}
   - component: {fileID: 1152731102}
   m_Layer: 5
-  m_Name: DialogWelcomeText
+  m_Name: DialogAnswerText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1649,7 +1725,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1370399377
 Transform:
   m_ObjectHideFlags: 0
@@ -2693,8 +2769,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 506f976b5f4f722478c078dd9ce2311c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  maxDialogDistance: 2
   dialogUI: {fileID: 1370399376}
   dialogHeaderText: {fileID: 352781798}
+  dialogAnswerText: {fileID: 1152731102}
+  dialogOptionList: {fileID: 292589157}
+  dialogOptionsPrefab: {fileID: 6731729454100042408, guid: 89822e6cd45468d429f1df58ace5f977,
+    type: 3}
 --- !u!4 &2129150373
 Transform:
   m_ObjectHideFlags: 0
