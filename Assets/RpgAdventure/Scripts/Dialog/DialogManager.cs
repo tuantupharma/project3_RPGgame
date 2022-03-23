@@ -2,12 +2,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 namespace RpgAdventure
 {
     public class DialogManager : MonoBehaviour
     {
+        public float timeToshowOptions = 2.0f;
         public float maxDialogDistance ;
         public GameObject dialogUI;
         public Text dialogHeaderText;
@@ -20,6 +22,9 @@ namespace RpgAdventure
         private QuestGiver m_Npc;
         private Dialog m_ActiveDialog;
         private float m_OptionTopPossition;
+        private float m_TimerToShowOptions; 
+
+
         const float c_DistanceBetweenOption = 32.0f;
         public bool HasActiveDialog { get { return m_ActiveDialog != null; } }
         private float DialogDistance { get { return Vector3.Distance(
@@ -50,7 +55,7 @@ namespace RpgAdventure
                    
                     if (DialogDistance < maxDialogDistance)
                     {
-                       StartCoroutine(StartDialog());
+                       StartDialog();
 
 
                     }
@@ -63,36 +68,47 @@ namespace RpgAdventure
             {
                 StopDialog();
             }
+
+            if(m_TimerToShowOptions > 0)
+            {
+                m_TimerToShowOptions += Time.deltaTime;
+                if(m_TimerToShowOptions >= timeToshowOptions)
+                {
+                    m_TimerToShowOptions = 0;
+                    DisplayDialogOption();
+                }
+            }
+
         }
 
-        private IEnumerator StartDialog()
+        private void StartDialog()
         {
             m_ActiveDialog = m_Npc.dialog;
             dialogHeaderText.text = m_Npc.name;
             dialogUI.SetActive(true);
             ClearDialogOption();
             DisplayAnswerText(m_ActiveDialog.welcomeText);
+            TriggerDialogOptions();
+
            
-
-            yield return new WaitForSeconds(2.0f);
-
-            if (HasActiveDialog)
-            {
-
-                DisplayDialogOption();
-            }
          
         }
 
+      
+        private void DisplayAnswerText(string answerText)
+        {
+            dialogAnswerText.gameObject.SetActive(true);
+            dialogAnswerText.text = answerText;
+        }
         private void DisplayDialogOption()
         {
             HideAnswerText();
             CreateDiaLogMenu();
         }
-        private void DisplayAnswerText(string answerText)
+
+        private void TriggerDialogOptions()
         {
-            dialogAnswerText.gameObject.SetActive(true);
-            dialogAnswerText.text = answerText;
+            m_TimerToShowOptions = 0.001f;
         }
         private void HideAnswerText()
         {
@@ -106,7 +122,7 @@ namespace RpgAdventure
             {
                 m_OptionTopPossition += c_DistanceBetweenOption;
                var dialogOption =  CreateDialogOption(query.text);
-
+                RegisterOptionClickHandle(dialogOption, query);
             }
 
         }
@@ -123,11 +139,26 @@ namespace RpgAdventure
             return buttonInstance;
         }
 
+        private void RegisterOptionClickHandle(Button dialogOption,DialogQuery query)
+        {
+            EventTrigger trigger = dialogOption.gameObject.AddComponent<EventTrigger>();
+            var pointerDown = new EventTrigger.Entry();
+            pointerDown.eventID = EventTriggerType.PointerDown;
+
+            pointerDown.callback.AddListener((e) =>
+            {
+                Debug.Log("Click on:" + query.text);
+            });
+            trigger.triggers.Add(pointerDown);
+
+        }
+
+
         private void StopDialog()
         {
             m_Npc = null;
             m_ActiveDialog = null;
-
+            m_TimerToShowOptions = 0;
             dialogUI.SetActive(false);
         }
 
