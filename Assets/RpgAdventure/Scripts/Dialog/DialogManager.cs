@@ -75,6 +75,7 @@ namespace RpgAdventure
                 m_TimerToShowOptions += Time.deltaTime;
                 if(m_TimerToShowOptions >= timeToshowOptions)
                 {
+                    m_TimerToShowOptions = 0;
                     if (m_ForceDialogQuit)
                     {
                         StopDialog();
@@ -82,10 +83,11 @@ namespace RpgAdventure
                     else
                     {
                         DisplayDialogOption();
+                       
                     }
 
-                    m_TimerToShowOptions = 0;
-                    DisplayDialogOption();
+                   
+                 
                 }
             }
 
