@@ -81,7 +81,8 @@ namespace RpgAdventure
                 Damageable.DamageMessage data;
                 data.amount = damage;
                 data.damager = this;
-                data.damageSource = m_Owner.transform.position;
+
+                data.damageSource = m_Owner;
                 damageable.ApplyDamage(data);
             }  
 

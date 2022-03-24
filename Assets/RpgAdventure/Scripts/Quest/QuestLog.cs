@@ -45,7 +45,7 @@ namespace RpgAdventure
 
         public void AddQuest(Quest quest)
         {
-            Debug.Log("coppy Q to  Q Log" + quest.title);
+            Debug.Log("coppy Q to  Q Log " + quest.title);
             quests.Add(new AcceptedQuest(quest));
         }
 

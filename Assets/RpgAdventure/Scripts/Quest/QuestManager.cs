@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
@@ -72,20 +73,40 @@ namespace RpgAdventure
             }
         }
         // focus  nhan tin enemy die, ten enemy, vu khi diet enemy
-        public void OnReceiveMessage(MessageType type, Damageable sender, Damageable.DamageMessage msg)
+        public void OnReceiveMessage(MessageType type, object sender, object msg)
         {
             if(type == MessageType.DEAD)
             {
-                CheckQuestWhenEnemyDead(sender, msg);
+                CheckQuestWhenEnemyDead((Damageable)sender, (Damageable.DamageMessage)msg);
             }
                     
         }
 
         private void CheckQuestWhenEnemyDead(Damageable sender, Damageable.DamageMessage msg)
         {
-            Debug.Log("check Q obj ");
-            Debug.Log(sender.name );
-            Debug.Log( msg.damager);
+            var questLog = msg.damageSource.GetComponent<QuestLog>();
+            if(questLog == null) { return; }
+            foreach(var quest in questLog.quests)
+            {
+                if(quest.status == QuestStatus.ACTIVE)
+                {
+                    if(quest.type == QuestType.HUNT && Array.Exists(quest.targets,
+                        (targetUid) => sender.GetComponent<UniqueId>().Uid == targetUid))
+                    {
+
+                        quest.amount -= 1;
+                        if (quest.amount == 0)
+                        {
+                            quest.status = QuestStatus.COMPLETED;
+                            Debug.Log("Quest has been completed!");
+
+                        }
+                    }
+
+                }
+
+            }
+
         }
 
     }

@@ -16,11 +16,13 @@ namespace RpgAdventure
     }
     public interface IMessageReceiver
     {
+        //Damageable sender,
+       // Damageable.DamageMessage message
 
-      
+
         void OnReceiveMessage(MessageType type, 
-            Damageable sender,
-            Damageable.DamageMessage message);
+            object sender,
+            object message);
 
     }
 }

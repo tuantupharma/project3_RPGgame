@@ -1,0 +1,155 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &744147440
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4953406870225767212}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a59743a93e431064283b098e0498047c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_uid: 01ede650-e2fa-44c6-912d-29534a238fab
+--- !u!1001 &3972267515859465323
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: -733784515981862611, guid: 02dcec948ab72bf42b510e2fbf4d4f85,
+        type: 3}
+      propertyPath: dialog.welcomeText
+      value: Hello Stranger, What brings you here?
+      objectReference: {fileID: 0}
+    - target: {fileID: -733784515981862611, guid: 02dcec948ab72bf42b510e2fbf4d4f85,
+        type: 3}
+      propertyPath: dialog.queries.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: -733784515981862611, guid: 02dcec948ab72bf42b510e2fbf4d4f85,
+        type: 3}
+      propertyPath: dialog.queries.Array.data[0].text
+      value: I am looking for a job
+      objectReference: {fileID: 0}
+    - target: {fileID: -733784515981862611, guid: 02dcec948ab72bf42b510e2fbf4d4f85,
+        type: 3}
+      propertyPath: dialog.queries.Array.data[1].text
+      value: i will take care of it
+      objectReference: {fileID: 0}
+    - target: {fileID: -733784515981862611, guid: 02dcec948ab72bf42b510e2fbf4d4f85,
+        type: 3}
+      propertyPath: dialog.queries.Array.data[2].text
+      value: Not your bussiness
+      objectReference: {fileID: 0}
+    - target: {fileID: -733784515981862611, guid: 02dcec948ab72bf42b510e2fbf4d4f85,
+        type: 3}
+      propertyPath: dialog.queries.Array.data[0].answer.text
+      value: 'There are 2 bandits north of the town that  are causing trouble to
+        our people.
+
+        Could you take care of it?
+
+'
+      objectReference: {fileID: 0}
+    - target: {fileID: -733784515981862611, guid: 02dcec948ab72bf42b510e2fbf4d4f85,
+        type: 3}
+      propertyPath: dialog.queries.Array.data[1].answer.text
+      value: goodbye
+      objectReference: {fileID: 0}
+    - target: {fileID: -733784515981862611, guid: 02dcec948ab72bf42b510e2fbf4d4f85,
+        type: 3}
+      propertyPath: dialog.queries.Array.data[2].answer.text
+      value: Get loss!
+      objectReference: {fileID: 0}
+    - target: {fileID: -733784515981862611, guid: 02dcec948ab72bf42b510e2fbf4d4f85,
+        type: 3}
+      propertyPath: dialog.queries.Array.data[2].isAlwayAsked
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -733784515981862611, guid: 02dcec948ab72bf42b510e2fbf4d4f85,
+        type: 3}
+      propertyPath: dialog.queries.Array.data[0].answer.questId
+      value: q-1
+      objectReference: {fileID: 0}
+    - target: {fileID: -733784515981862611, guid: 02dcec948ab72bf42b510e2fbf4d4f85,
+        type: 3}
+      propertyPath: dialog.queries.Array.data[1].answer.forceDialogQuit
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -733784515981862611, guid: 02dcec948ab72bf42b510e2fbf4d4f85,
+        type: 3}
+      propertyPath: dialog.queries.Array.data[2].answer.forceDialogQuit
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8325812317603824013, guid: 02dcec948ab72bf42b510e2fbf4d4f85,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8325812317603824013, guid: 02dcec948ab72bf42b510e2fbf4d4f85,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 5.83
+      objectReference: {fileID: 0}
+    - target: {fileID: 8325812317603824013, guid: 02dcec948ab72bf42b510e2fbf4d4f85,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.034799695
+      objectReference: {fileID: 0}
+    - target: {fileID: 8325812317603824013, guid: 02dcec948ab72bf42b510e2fbf4d4f85,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -0.3528437
+      objectReference: {fileID: 0}
+    - target: {fileID: 8325812317603824013, guid: 02dcec948ab72bf42b510e2fbf4d4f85,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 8325812317603824013, guid: 02dcec948ab72bf42b510e2fbf4d4f85,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8325812317603824013, guid: 02dcec948ab72bf42b510e2fbf4d4f85,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 8325812317603824013, guid: 02dcec948ab72bf42b510e2fbf4d4f85,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8325812317603824013, guid: 02dcec948ab72bf42b510e2fbf4d4f85,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8325812317603824013, guid: 02dcec948ab72bf42b510e2fbf4d4f85,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: -90
+      objectReference: {fileID: 0}
+    - target: {fileID: 8325812317603824013, guid: 02dcec948ab72bf42b510e2fbf4d4f85,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8331198682446249799, guid: 02dcec948ab72bf42b510e2fbf4d4f85,
+        type: 3}
+      propertyPath: m_Name
+      value: Emilia
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 02dcec948ab72bf42b510e2fbf4d4f85, type: 3}
+--- !u!1 &4953406870225767212 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8331198682446249799, guid: 02dcec948ab72bf42b510e2fbf4d4f85,
+    type: 3}
+  m_PrefabInstance: {fileID: 3972267515859465323}
+  m_PrefabAsset: {fileID: 0}

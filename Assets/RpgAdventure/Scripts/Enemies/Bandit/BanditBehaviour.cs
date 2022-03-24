@@ -64,7 +64,7 @@ public class BanditBehaviour : MonoBehaviour, IMessageReceiver
         }
 
 
-        public void OnReceiveMessage(MessageType type, Damageable sender,Damageable.DamageMessage msg)
+        public void OnReceiveMessage(MessageType type, object sender, object msg)
         {
             switch (type)
             {
