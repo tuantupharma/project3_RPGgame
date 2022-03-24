@@ -12,6 +12,8 @@ namespace RpgAdventure
         public float invulnerabilityTime = 0.5f;
         public int maxHitPoints;
         public int CurrentHitPoints { get; private set; }
+        public int experience;
+        public LayerMask playerActionRecievers;
         public List<MonoBehaviour> onDamageMessageReceivers;
 
         private bool m_IsInvulnerable = false;
@@ -20,8 +22,13 @@ namespace RpgAdventure
         private void Awake()
         {
             CurrentHitPoints = maxHitPoints;
-            // focus
+
+            if(0 !=(playerActionRecievers.value & 1 << gameObject.layer))
+            { 
+                // focus
             onDamageMessageReceivers.Add(FindObjectOfType<QuestManager>());
+            onDamageMessageReceivers.Add(FindObjectOfType<PlayerStats>());
+            }
         }
 
         private void Update()

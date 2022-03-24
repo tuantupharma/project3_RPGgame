@@ -82,6 +82,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5754929848739248602, guid: eaefec6a6237efc4d91ce52520960b8a,
         type: 3}
+      propertyPath: experience
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 5754929848739248602, guid: eaefec6a6237efc4d91ce52520960b8a,
+        type: 3}
       propertyPath: maxHitPoints
       value: 20
       objectReference: {fileID: 0}

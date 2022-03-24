@@ -80,6 +80,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Bandit Leader
       objectReference: {fileID: 0}
+    - target: {fileID: 5754929848739248602, guid: eaefec6a6237efc4d91ce52520960b8a,
+        type: 3}
+      propertyPath: experience
+      value: 200
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: eaefec6a6237efc4d91ce52520960b8a, type: 3}
 --- !u!1 &7184294772706146026 stripped

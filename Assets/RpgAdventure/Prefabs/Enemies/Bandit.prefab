@@ -1925,6 +1925,9 @@ MonoBehaviour:
   hitAngle: 360
   invulnerabilityTime: 0.5
   maxHitPoints: 100
+  playerActionRecievers:
+    serializedVersion: 2
+    m_Bits: 256
   onDamageMessageReceivers:
   - {fileID: 5944734747812898736}
 --- !u!136 &1782172151

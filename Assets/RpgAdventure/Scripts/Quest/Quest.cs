@@ -20,7 +20,7 @@ namespace RpgAdventure
         public string uid;
         public string title;
         public string description;
-        public string experience;
+        public int experience;
         public int gold;
 
         public int amount;
