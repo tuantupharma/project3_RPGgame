@@ -23,7 +23,7 @@ namespace RpgAdventure
         public string text;
         public DialogAnswer answer;
         public bool isAsked;
-
+        public bool isAlwayAsked;
 
     }
 
