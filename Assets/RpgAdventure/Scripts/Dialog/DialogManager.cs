@@ -160,6 +160,11 @@ namespace RpgAdventure
 
             pointerDown.callback.AddListener((e) =>
             {
+                if (!String.IsNullOrEmpty(query.answer.questId))
+                {
+                    m_Player.GetComponent<QuestLog>().AddQuest(m_Npc.quest);
+                }
+
                 if (query.answer.forceDialogQuit)
                 {
                     m_ForceDialogQuit = true;

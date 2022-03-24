@@ -18,7 +18,9 @@ namespace RpgAdventure
     {
 
       
-        void OnReceiveMessage(MessageType type);
+        void OnReceiveMessage(MessageType type, 
+            Damageable sender,
+            Damageable.DamageMessage message);
 
     }
 }

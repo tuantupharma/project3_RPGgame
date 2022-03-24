@@ -2863,6 +2863,16 @@ PrefabInstance:
       propertyPath: m_Name
       value: Bandit
       objectReference: {fileID: 0}
+    - target: {fileID: 5754929848739248602, guid: eaefec6a6237efc4d91ce52520960b8a,
+        type: 3}
+      propertyPath: onDamageMessageReceivers.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5754929848739248602, guid: eaefec6a6237efc4d91ce52520960b8a,
+        type: 3}
+      propertyPath: onDamageMessageReceivers.Array.data[1]
+      value: 
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: eaefec6a6237efc4d91ce52520960b8a, type: 3}
 --- !u!4 &3224000196589818150 stripped
@@ -2973,6 +2983,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: df72a106ea34d024aa676a9908000936, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  quests: []
 --- !u!4 &7671546242350874166 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5185535119889688498, guid: 833a581dde8e22748ac6598cc668bf83,

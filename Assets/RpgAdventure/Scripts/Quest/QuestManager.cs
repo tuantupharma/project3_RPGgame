@@ -22,7 +22,7 @@ namespace RpgAdventure
 
     }
 
-    public class QuestManager : MonoBehaviour
+    public class QuestManager : MonoBehaviour, IMessageReceiver
     {
         public Quest[] quests;
 
@@ -71,7 +71,22 @@ namespace RpgAdventure
                 }
             }
         }
+        // focus  nhan tin enemy die, ten enemy, vu khi diet enemy
+        public void OnReceiveMessage(MessageType type, Damageable sender, Damageable.DamageMessage msg)
+        {
+            if(type == MessageType.DEAD)
+            {
+                CheckQuestWhenEnemyDead(sender, msg);
+            }
+                    
+        }
 
+        private void CheckQuestWhenEnemyDead(Damageable sender, Damageable.DamageMessage msg)
+        {
+            Debug.Log("check Q obj ");
+            Debug.Log(sender.name );
+            Debug.Log( msg.damager);
+        }
 
     }
 

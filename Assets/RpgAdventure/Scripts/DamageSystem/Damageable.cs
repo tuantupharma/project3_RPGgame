@@ -20,6 +20,8 @@ namespace RpgAdventure
         private void Awake()
         {
             CurrentHitPoints = maxHitPoints;
+            // focus
+            onDamageMessageReceivers.Add(FindObjectOfType<QuestManager>());
         }
 
         private void Update()
@@ -55,7 +57,7 @@ namespace RpgAdventure
             for(int i = 0; i < onDamageMessageReceivers.Count; i++)
             {
                 var receiver = onDamageMessageReceivers[i] as IMessageReceiver;
-                receiver.OnReceiveMessage(messageType);
+                receiver.OnReceiveMessage(messageType,this,data);
 
             }
 
