@@ -9,8 +9,10 @@ public class FixedUpdateFollow : MonoBehaviour
         public Transform toFollow;
     private void FixedUpdate()
     {
+        if (toFollow == null) { return; }   
         transform.position = toFollow.position;
         transform.rotation = toFollow.rotation;
     }
+
 }
 }
