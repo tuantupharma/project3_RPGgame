@@ -14,7 +14,7 @@ namespace RpgAdventure
         public GameObject itemPrefab;
         public LayerMask targetLayers;
         [Serializable]
-        public class  pickupEvent : UnityEvent<GameObject> { };
+        public class  pickupEvent : UnityEvent<ItemSpawner> { };
         public  pickupEvent onItemPickup;
         // Start is called before the first frame update
         void Awake()
@@ -29,8 +29,8 @@ namespace RpgAdventure
         {
             if(0!= (targetLayers.value & 1 << other.gameObject.layer))
             {
-               onItemPickup.Invoke(itemPrefab);
-                Destroy(gameObject);
+               onItemPickup.Invoke(this);
+               // Destroy(gameObject);
 
 
             }
