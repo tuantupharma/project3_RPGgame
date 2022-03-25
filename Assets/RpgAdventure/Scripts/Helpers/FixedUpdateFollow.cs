@@ -14,5 +14,13 @@ public class FixedUpdateFollow : MonoBehaviour
         transform.rotation = toFollow.rotation;
     }
 
+public void SetFollowee(Transform followee)
+        {
+            toFollow = followee; 
+        }
+
+
+
+
 }
 }

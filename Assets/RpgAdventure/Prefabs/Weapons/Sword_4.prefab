@@ -93,7 +93,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 186e13359ac6f1447827872d058606d7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  targetLayers:
+    serializedVersion: 2
+    m_Bits: 256
   damage: 30
+  attackPoints:
+  - radius: 0.2
+    offset: {x: -0.21, y: 0.06, z: 0.84}
+    rootTransform: {fileID: 9143485338175199400}
+  - radius: 0.2
+    offset: {x: -0.12, y: 0, z: 0.36}
+    rootTransform: {fileID: 9143485338175199400}
 --- !u!114 &6388984368998472226
 MonoBehaviour:
   m_ObjectHideFlags: 0

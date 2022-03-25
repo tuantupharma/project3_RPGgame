@@ -17,6 +17,7 @@ public class PlayerController : MonoBehaviour, IAttackAnimListener
         [SerializeField] private float m_MaxRotationSpeed = 1200f;
         [SerializeField] private float m_MinRotationSpeed = 800f;
         [SerializeField] float gravity = 20f;
+        public Transform attackHand;
 
         private static PlayerController s_Instance;
         private PlayerInput m_PlayerInput;
@@ -47,7 +48,7 @@ public class PlayerController : MonoBehaviour, IAttackAnimListener
             m_CameraController = Camera.main.GetComponent<CameraController>();
             s_Instance = this;
 
-            meleeWeapon.SetOwner(gameObject);
+         //   meleeWeapon.SetOwner(gameObject);
         }
         // Update is called once per frame
         void FixedUpdate()
@@ -102,6 +103,24 @@ public class PlayerController : MonoBehaviour, IAttackAnimListener
             meleeWeapon.EndAttack();
         }
 
+        public void UseItemFrom(InventorySlot slot)
+        {
+            if(meleeWeapon != null)
+            {
+                if(slot.itemPrefab.name == meleeWeapon.name) { return; }
+                else
+                {
+                    Destroy(meleeWeapon.gameObject);
+                }
+            }
+
+            meleeWeapon = Instantiate(slot.itemPrefab, transform)
+                .GetComponent<MeleeWeapon>();
+            meleeWeapon.GetComponent<FixedUpdateFollow>().SetFollowee(attackHand);
+            meleeWeapon.name = slot.itemPrefab.name;
+            meleeWeapon.SetOwner(gameObject);
+        }
+       
         private void ComputeVerticalMovement()
         {
             m_VerticalSpeed = -gravity;
