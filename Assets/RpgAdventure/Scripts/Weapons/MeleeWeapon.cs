@@ -87,6 +87,11 @@ namespace RpgAdventure
             }  
 
         }
+        public void SetTargetLayer(LayerMask targetMark)
+        {
+            targetLayers = targetMark;
+        }
+
 
         public void SetOwner(GameObject owner)
         {
@@ -95,6 +100,7 @@ namespace RpgAdventure
 
         public void BeginAttack()
         {
+            
             m_IsAttack = true;
             m_OriginAttackPos = new Vector3[attackPoints.Length];
             

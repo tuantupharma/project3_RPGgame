@@ -5,9 +5,10 @@ using UnityEngine.AI;
 
 
 namespace RpgAdventure {
-public class BanditBehaviour : MonoBehaviour, IMessageReceiver
+public class BanditBehaviour : MonoBehaviour, IMessageReceiver, IAttackAnimListener
     {
         public PlayerScanner playerScanner;
+        public MeleeWeapon meleeWeapon;
         [SerializeField] float timeTostopPursuit = 2.0f;
         [SerializeField] float timeToWaitOnPursuit = 2f;
         public float attackDistance = 1.1f;
@@ -32,6 +33,8 @@ public class BanditBehaviour : MonoBehaviour, IMessageReceiver
            
             m_OriginalPosition = transform.position;
             m_OriginalRotation = transform.rotation;
+            meleeWeapon.SetOwner(gameObject);
+            meleeWeapon.SetTargetLayer(1 << (PlayerController.Instance.gameObject.layer));
         }
 
         private void Update()
@@ -163,8 +166,18 @@ public class BanditBehaviour : MonoBehaviour, IMessageReceiver
             m_EnemyController.FollowTarget(m_OriginalPosition);
 
         }
+        public void MeleeAttackStart()
+        {
+           
+            meleeWeapon.BeginAttack();
+        }
 
-      
+        public void MeleeAttackEnd()
+        {
+            
+            meleeWeapon.EndAttack();
+        }
+
 
 #if UNITY_EDITOR
         private void OnDrawGizmosSelected()
@@ -187,6 +200,8 @@ public class BanditBehaviour : MonoBehaviour, IMessageReceiver
                360,
                playerScanner.meleeDetectionRadius);
         }
+
+     
 #endif
 
     }

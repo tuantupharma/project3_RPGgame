@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace RpgAdventure { 
 
-public class PlayerController : MonoBehaviour, IAttackAnimListener
+public class PlayerController : MonoBehaviour, IAttackAnimListener, IMessageReceiver
     {
        public static PlayerController Instance 
         { get { return s_Instance; } }
@@ -24,7 +24,7 @@ public class PlayerController : MonoBehaviour, IAttackAnimListener
         CharacterController m_CharController;
         private Animator m_Animator;
         CameraController m_CameraController;
-
+        private HudManager m_HudManager;
         private Quaternion m_TargetRotation;
 
         private float m_DersiredForwardSpeed;
@@ -46,7 +46,10 @@ public class PlayerController : MonoBehaviour, IAttackAnimListener
             m_PlayerInput = GetComponent<PlayerInput>();
             m_Animator = GetComponent<Animator>();
             m_CameraController = Camera.main.GetComponent<CameraController>();
+            m_HudManager = FindObjectOfType<HudManager>();
             s_Instance = this;
+
+            m_HudManager.SetMaxHealth(GetComponent<Damageable>().maxHitPoints);
 
          //   meleeWeapon.SetOwner(gameObject);
         }
@@ -95,13 +98,30 @@ public class PlayerController : MonoBehaviour, IAttackAnimListener
         
         public void MeleeAttackStart()
         {
-            meleeWeapon.BeginAttack();
+            if(meleeWeapon != null)
+            {
+                meleeWeapon.BeginAttack();
+            }
+           
         }
         // this method is called by animation event
         public void MeleeAttackEnd()
         {
-            meleeWeapon.EndAttack();
+            if(meleeWeapon != null)
+            {
+                meleeWeapon.EndAttack();
+            }
+           
         }
+        public void OnReceiveMessage(MessageType type, object sender, object message)
+        {
+           if(type == MessageType.DAMAGE)
+            {
+                m_HudManager.SetHealth((sender as Damageable).CurrentHitPoints) ;
+               
+            }
+        }
+
 
         public void UseItemFrom(InventorySlot slot)
         {
@@ -168,7 +188,7 @@ public class PlayerController : MonoBehaviour, IAttackAnimListener
 
         }
 
-
+       
     }
 
 
