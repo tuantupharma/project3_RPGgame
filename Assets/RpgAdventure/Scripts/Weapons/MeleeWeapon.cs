@@ -20,6 +20,8 @@ namespace RpgAdventure
         public LayerMask targetLayers;
         public int damage = 10;
         public AttackPoint[] attackPoints = new AttackPoint[0];
+        public RandomAudioPlayer swingAudio;
+        public RandomAudioPlayer impactAudio;
 
         private bool m_IsAttack = false;
         private Vector3[] m_OriginAttackPos;
@@ -83,6 +85,11 @@ namespace RpgAdventure
                 data.damager = this;
 
                 data.damageSource = m_Owner;
+                if(impactAudio!= null)
+                {
+                    impactAudio.PlayRandomClip();
+                }
+
                 damageable.ApplyDamage(data);
             }  
 
@@ -100,7 +107,7 @@ namespace RpgAdventure
 
         public void BeginAttack()
         {
-            
+            swingAudio.PlayRandomClip();
             m_IsAttack = true;
             m_OriginAttackPos = new Vector3[attackPoints.Length];
             
