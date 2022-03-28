@@ -27,16 +27,24 @@ public class PlayerController : MonoBehaviour, IAttackAnimListener, IMessageRece
         private HudManager m_HudManager;
         private Quaternion m_TargetRotation;
 
+        private AnimatorStateInfo m_CurrentStateInfo;
+        private AnimatorStateInfo m_NextStateInfo;
+        private bool m_IsAnimatorTransitioning;
+        private bool m_IsRespawning;
+
         private float m_DersiredForwardSpeed;
         private float m_ForwardSpeed;
         private float m_VerticalSpeed;
         const float k_Acceleration = 20f;
         const float k_Deceleration = 35f;
 
+        // Animator Parameter Hashes
         private readonly int m_HashForwardSpeed = Animator.StringToHash("ForwardSpeed");
         private readonly int m_HashMeleeAttack = Animator.StringToHash("MeleeAttack");
-
-
+        private readonly int m_HashDeath = Animator.StringToHash("Death");
+        
+        //Animator Tag Hashes
+        private readonly int m_HashBlockInput = Animator.StringToHash("BlockInput");
         //video 10 add player input
         //private Vector3 m_Movement;
 
@@ -55,11 +63,12 @@ public class PlayerController : MonoBehaviour, IAttackAnimListener, IMessageRece
         }
         // Update is called once per frame
         void FixedUpdate()
-    {
+        {
+            CacheAnimationState();
             ComputeForwardMovement();
             ComputeVerticalMovement();
             ComputeRotation();
-
+            UpdateInputBlocking();
 
             if (m_PlayerInput.IsMoveInput)
             {
@@ -90,6 +99,10 @@ public class PlayerController : MonoBehaviour, IAttackAnimListener, IMessageRece
 
         private void OnAnimatorMove()
         {
+            if (m_IsRespawning)
+            {
+                return; 
+            }
             Vector3 movement = m_Animator.deltaPosition;
             movement += m_VerticalSpeed * Vector3.up* Time.fixedDeltaTime;
             m_CharController.Move(movement);
@@ -113,6 +126,19 @@ public class PlayerController : MonoBehaviour, IAttackAnimListener, IMessageRece
             }
            
         }
+        // this method is called by animation event SMB
+        public void StartRespawn()
+        {
+            
+            transform.position = Vector3.zero;
+           
+        }
+        // this method is called by animation event SMB
+        public void FinishRespawn()
+        {
+            m_IsRespawning = false;
+        }
+
         public void OnReceiveMessage(MessageType type, object sender, object message)
         {
            if(type == MessageType.DAMAGE)
@@ -120,6 +146,14 @@ public class PlayerController : MonoBehaviour, IAttackAnimListener, IMessageRece
                 m_HudManager.SetHealth((sender as Damageable).CurrentHitPoints) ;
                
             }
+
+           if(type == MessageType.DEAD)
+            {
+                m_IsRespawning = true;
+                m_Animator.SetTrigger(m_HashDeath);
+                m_HudManager.SetHealth(0);
+            }
+
         }
 
 
@@ -188,7 +222,28 @@ public class PlayerController : MonoBehaviour, IAttackAnimListener, IMessageRece
 
         }
 
-       
+        private void CacheAnimationState()
+        {
+            m_CurrentStateInfo = m_Animator.GetCurrentAnimatorStateInfo(0);
+            m_NextStateInfo = m_Animator.GetNextAnimatorStateInfo(0);
+
+            m_IsAnimatorTransitioning = m_Animator.IsInTransition(0);
+           
+        
+        }
+
+        private void UpdateInputBlocking()
+        {
+            bool inputBlocked = m_CurrentStateInfo.tagHash == m_HashBlockInput && !m_IsAnimatorTransitioning;
+
+            // phai trai OR chay cahaiben ke ca khi ve trai dung
+            //  inputBlocked = inputBlocked | m_NextStateInfo.tagHash == m_HashBlockInput;
+
+            inputBlocked |=  m_NextStateInfo.tagHash == m_HashBlockInput;
+            m_PlayerInput.isPlayerControllerInputBlocked = inputBlocked;
+        
+        }
+
     }
 
 

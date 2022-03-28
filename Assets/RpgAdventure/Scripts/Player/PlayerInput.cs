@@ -11,7 +11,9 @@ namespace RpgAdventure
     {
 
         public static PlayerInput Instance {get {return s_Instance;} }
-      //  [SerializeField] float distanceToInteractWithNpc = 2.0f;
+        public bool isPlayerControllerInputBlocked;
+       // [SerializeField] float distanceToInteractWithNpc = 2.0f;
+
 
         private static PlayerInput s_Instance;
         private Vector3 m_Movement;
@@ -22,7 +24,14 @@ namespace RpgAdventure
         public Collider OptionClickTarget { get { return m_OptionClickTarget; } }
         public Vector3 MoveInput
         {
-            get { return m_Movement; }
+            get 
+            {
+                if (isPlayerControllerInputBlocked)
+                {
+                    return Vector3.zero;
+                }
+                return m_Movement; 
+            }
         }
         public bool IsMoveInput
         {
@@ -36,7 +45,7 @@ namespace RpgAdventure
         {
             get
             {
-                return m_IsAttack;
+                return !isPlayerControllerInputBlocked && m_IsAttack;
             }
         }
 
