@@ -39,6 +39,12 @@ public class BanditBehaviour : MonoBehaviour, IMessageReceiver, IAttackAnimListe
 
         private void Update()
         {
+            if (PlayerController.Instance.IsRespawning)
+            {
+                GoToOriginalSpot();
+                CheckIfNearBase();
+                return;
+            }
             GuardPosition();
 
         }
@@ -96,6 +102,12 @@ public class BanditBehaviour : MonoBehaviour, IMessageReceiver, IAttackAnimListe
             m_EnemyController.Animator.SetTrigger(m_HashHurt);
         }
 
+        private void GoToOriginalSpot()
+        {
+            m_FollowTarget = null;
+            m_EnemyController.Animator.SetBool(m_HashInPursuit, false);
+            m_EnemyController.FollowTarget(m_OriginalPosition);
+        }
         private void CheckIfNearBase()
         {
             Vector3 toBase = m_OriginalPosition - transform.position;

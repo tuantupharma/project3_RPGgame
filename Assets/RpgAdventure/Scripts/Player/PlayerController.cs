@@ -10,6 +10,8 @@ public class PlayerController : MonoBehaviour, IAttackAnimListener, IMessageRece
        public static PlayerController Instance 
         { get { return s_Instance; } }
 
+        public bool IsRespawning { get { return m_IsRespawning; } }
+
         [SerializeField] MeleeWeapon meleeWeapon;
         [SerializeField] float maxForwardSpeed = 8.0f;
         [SerializeField] float speed;
@@ -21,6 +23,7 @@ public class PlayerController : MonoBehaviour, IAttackAnimListener, IMessageRece
 
         private static PlayerController s_Instance;
         private PlayerInput m_PlayerInput;
+        private Damageable m_Damageable;
         CharacterController m_CharController;
         private Animator m_Animator;
         CameraController m_CameraController;
@@ -56,8 +59,9 @@ public class PlayerController : MonoBehaviour, IAttackAnimListener, IMessageRece
             m_CameraController = Camera.main.GetComponent<CameraController>();
             m_HudManager = FindObjectOfType<HudManager>();
             s_Instance = this;
+            m_Damageable = GetComponent<Damageable>();
 
-            m_HudManager.SetMaxHealth(GetComponent<Damageable>().maxHitPoints);
+            m_HudManager.SetMaxHealth(m_Damageable.maxHitPoints);
 
          //   meleeWeapon.SetOwner(gameObject);
         }
@@ -131,6 +135,8 @@ public class PlayerController : MonoBehaviour, IAttackAnimListener, IMessageRece
         {
             
             transform.position = Vector3.zero;
+            m_HudManager.SetHealth(m_Damageable.maxHitPoints);
+            m_Damageable.SetInitialHealth();
            
         }
         // this method is called by animation event SMB
