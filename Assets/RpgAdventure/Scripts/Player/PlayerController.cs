@@ -20,6 +20,7 @@ public class PlayerController : MonoBehaviour, IAttackAnimListener, IMessageRece
         [SerializeField] private float m_MinRotationSpeed = 800f;
         [SerializeField] float gravity = 20f;
         public Transform attackHand;
+        public RandomAudioPlayer sprintAudio;
 
         private static PlayerController s_Instance;
         private PlayerInput m_PlayerInput;
@@ -45,7 +46,8 @@ public class PlayerController : MonoBehaviour, IAttackAnimListener, IMessageRece
         private readonly int m_HashForwardSpeed = Animator.StringToHash("ForwardSpeed");
         private readonly int m_HashMeleeAttack = Animator.StringToHash("MeleeAttack");
         private readonly int m_HashDeath = Animator.StringToHash("Death");
-        
+        private readonly int m_HashFootFall = Animator.StringToHash("FootFall");
+
         //Animator Tag Hashes
         private readonly int m_HashBlockInput = Animator.StringToHash("BlockInput");
         //video 10 add player input
@@ -94,9 +96,9 @@ public class PlayerController : MonoBehaviour, IAttackAnimListener, IMessageRece
                 m_Animator.SetTrigger(m_HashMeleeAttack);
                 
             }
-        
 
 
+            PlaySprintAudio();
            
 
         }
@@ -248,6 +250,28 @@ public class PlayerController : MonoBehaviour, IAttackAnimListener, IMessageRece
             inputBlocked |=  m_NextStateInfo.tagHash == m_HashBlockInput;
             m_PlayerInput.isPlayerControllerInputBlocked = inputBlocked;
         
+        }
+
+        private void PlaySprintAudio()
+        {
+            float footFallCurve = m_Animator.GetFloat(m_HashFootFall);
+            
+            if(footFallCurve >0.01f && !sprintAudio.isPlaying && sprintAudio.canPlay)
+            {
+
+                sprintAudio.isPlaying = true;
+                sprintAudio.canPlay = false;
+                sprintAudio.PlayRandomClip();
+
+                
+            }else if (sprintAudio.isPlaying)
+            {
+                sprintAudio.isPlaying = false;
+            }else if (footFallCurve < 0.01f && !sprintAudio.canPlay)
+            {
+                sprintAudio.canPlay = true;
+            }
+            
         }
 
     }
